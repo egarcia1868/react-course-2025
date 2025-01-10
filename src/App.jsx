@@ -4,16 +4,18 @@ import TabButton from "./components/TabButton";
 import { CORE_CONCEPTS } from "./data";
 
 function App() {
+  let tabContent = 'Please click a button';
+
   function handleSelect(selectedButton) {
     // selectedButton => 'components', 'jsx', 'props', 'state'
-    console.log(selectedButton);
+    tabContent = selectedButton;
   };
 
   return (
     <div>
       <Header />
       <main>
-        <section id="core-concepts">
+        <section id="cdore-concepts">
           <h2>Core Concepts</h2>
           <ul>
             <CoreConcept
@@ -38,6 +40,7 @@ function App() {
           <TabButton onSelect={() => handleSelect('props')}>Props</TabButton>
           <TabButton onSelect={() => handleSelect('state')}>State</TabButton>
           </menu>
+          {tabContent}
         </section>
       </main>
     </div>
