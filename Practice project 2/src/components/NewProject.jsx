@@ -28,21 +28,21 @@ export default function NewProject({ onSubmit, projects, onCancel }) {
   }
 
   return (
-    <div onSubmit={handleFormSubmit}>
-      <menu>
+    <div className="w-[35rem] mt-16" onSubmit={handleFormSubmit}>
+      <menu className="flex items-center justify-end gap-4 my-4">
         <li>
-          <button onClick={onCancel}>Cancel</button>
+          <button className="text-stone-800 hover:text-stone-950" onClick={onCancel}>Cancel</button>
         </li>
         <li>
-          <button type="submit" disabled={!saveEnabled}>
+          <button className='bg-stone-800 text-stone-50 hover:bg-stone-950 px-6 py-2 rounded-md' type="submit" disabled={!saveEnabled}>
             Save
           </button>
         </li>
       </menu>
       <div>
-      <Input label="Title" />
-      <Input label="Description" textarea />
-      <Input label="Due Date" />
+        <Input label="Title" />
+        <Input label="Description" textarea />
+        <Input label="Due Date" />
       </div>
     </div>
   );
