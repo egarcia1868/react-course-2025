@@ -8,13 +8,30 @@ function App() {
   const [ projects, setProjects ] = useState([]);
   const [ currentProject, setCurrentProject ] = useState(null);
   const [ addProject, setAddProject ] = useState(false);
+  const [ projectsState, setProjectsState] = useState({
+    selectedProjectId: undefined,
+    projects: []
+  });
 
   function handleSaveProjects(newProject) {
     setProjects([...projects, newProject])
   }
 
-  function handleAddNewProject() {
-    setAddProject(true);
+  function handleStartAddProject() {
+    setProjectsState(prevState => {
+      return {
+        ...prevState,
+        selectedProjectId: null,
+      }
+    });
+  }
+
+  let content;
+
+  if (projectsState.selectedProjectId === null) {
+    content = <NewProject />
+  } else if (projectsState.selectedProjectId === undefined) {
+    content = <NoProjectSelected onStartAddProject={handleStartAddProject} />
   }
 
   function handleCloseNewProject() {
@@ -27,8 +44,8 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar openProject={handleOpenProject} projects={projects} addNewProject={handleAddNewProject}/>
-      <NoProjectSelected />
+      <ProjectsSidebar onStartAddProject={handleStartAddProject} openProject={handleOpenProject} projects={projects} addNewProject={handleStartAddProject}/>
+      {content}
       {/* {addProject && <NewProject onSubmit={handleSaveProjects} projects={projects} onCancel={handleCloseNewProject}/>} */}
       {/* {!currentProject ? <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1> :  */}
       {/* <Project project={currentProject} />} */}
