@@ -13,9 +13,9 @@ function App() {
     projects: []
   });
 
-  function handleSaveProjects(newProject) {
-    setProjects([...projects, newProject])
-  }
+  // function handleSaveProjects(newProject) {
+  //   setProjects([...projects, newProject])
+  // }
 
   function handleStartAddProject() {
     setProjectsState(prevState => {
@@ -26,25 +26,42 @@ function App() {
     });
   }
 
+  function handleAddProject(projectData) {
+    setProjectsState(prevState => {
+      const newProject = {
+        ...projectData,
+        id: Math.random()
+      };
+
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject]
+      }
+    })
+  }
+
+  console.log(projectsState);
+
   let content;
 
   if (projectsState.selectedProjectId === null) {
-    content = <NewProject />
+    content = <NewProject onAdd={handleAddProject} />
   } else if (projectsState.selectedProjectId === undefined) {
     content = <NoProjectSelected onStartAddProject={handleStartAddProject} />
   }
 
-  function handleCloseNewProject() {
-    setAddProject(false);
-  }
+  // function handleCloseNewProject() {
+  //   setAddProject(false);
+  // }
 
-  function handleOpenProject(selectedProject) {
-    setCurrentProject(selectedProject)
-  }
+  // function handleOpenProject(selectedProject) {
+  //   setCurrentProject(selectedProject)
+  // }
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar onStartAddProject={handleStartAddProject} openProject={handleOpenProject} projects={projects} addNewProject={handleStartAddProject}/>
+      <ProjectsSidebar onStartAddProject={handleStartAddProject}/>
+      {/* <ProjectsSidebar onStartAddProject={handleStartAddProject} openProject={handleOpenProject} projects={projects} addNewProject={handleStartAddProject}/> */}
       {content}
       {/* {addProject && <NewProject onSubmit={handleSaveProjects} projects={projects} onCancel={handleCloseNewProject}/>} */}
       {/* {!currentProject ? <h1 className="my-8 text-center text-5xl font-bold">Hello World</h1> :  */}
