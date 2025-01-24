@@ -35,6 +35,7 @@ function App() {
 
       return {
         ...prevState,
+        selectedProjectId: undefined,
         projects: [...prevState.projects, newProject]
       }
     })
@@ -60,7 +61,7 @@ function App() {
 
   return (
     <main className="h-screen my-8 flex gap-8">
-      <ProjectsSidebar onStartAddProject={handleStartAddProject}/>
+      <ProjectsSidebar projects={projectsState.projects} onStartAddProject={handleStartAddProject}/>
       {/* <ProjectsSidebar onStartAddProject={handleStartAddProject} openProject={handleOpenProject} projects={projects} addNewProject={handleStartAddProject}/> */}
       {content}
       {/* {addProject && <NewProject onSubmit={handleSaveProjects} projects={projects} onCancel={handleCloseNewProject}/>} */}
