@@ -34,6 +34,10 @@ const Counter = memo(function Counter({ initialCount }) {
     [initialCount]
   );
 
+  // useEffect(() => {
+  //   setCounterChanges([{value: initialCount, id: Math.random() * 1000 }]);
+  // }, [initialCount]);
+
   // const [counter, setCounter] = useState(initialCount);
   const [counterChanges, setCounterChanges] = useState([
     { value: initialCount, id: Math.random() * 1000 },
